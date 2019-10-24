@@ -4,4 +4,4 @@
    <a href="https://github.com/Hyde46/Rust/actions" alt="GithubActions">
         <img src="https://github.com/Hyde46/rusterize/workflows/Rust/badge.svg" /></a>
 </p>
-Rasterizer in rust
+Toy-Rasterizer written in rust
