@@ -3,5 +3,6 @@
         "powf",
         "rusterize",
         "ulps"
-    ]
+    ],
+    "editor.formatOnSave": true
 }
