@@ -1,3 +1,4 @@
+pub mod geometry;
 pub mod matrices;
 pub mod vectors {
 
@@ -20,7 +21,7 @@ pub mod vectors {
         fn scale(&self, scalar: f32) -> Self;
         fn dot(&self, other: &Self) -> f32;
         fn length(&self) -> f32;
-        fn norm(self) -> Self;
+        fn norm(&self) -> Self;
     }
 
     impl VectorMath for Vec3 {
@@ -76,7 +77,7 @@ pub mod vectors {
                 z: self.z * factor,
             }
         }
-        fn norm(self) -> Self {
+        fn norm(&self) -> Self {
             /*
             Normalize Vector
             n = u / length(u)
@@ -132,5 +133,9 @@ pub mod vectors {
                 z: self.z / other.z,
             }
         }
+    }
+
+    pub fn normalize(vector: &Vec3) -> Vec3 {
+        vector.norm()
     }
 }

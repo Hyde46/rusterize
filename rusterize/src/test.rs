@@ -1,3 +1,4 @@
+use crate::math::geometry::Triangle;
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
 
@@ -303,4 +304,32 @@ fn test_std_trait_div_by_zero() {
     };
     let result = std::panic::catch_unwind(|| a / b);
     assert!(result.is_err());
+}
+
+#[test]
+fn test_triangle_normal() {
+    let t = Triangle {
+        v1: Vec3 {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        },
+        v2: Vec3 {
+            x: 1.0,
+            y: 0.0,
+            z: 0.0,
+        },
+        v3: Vec3 {
+            x: 1.0,
+            y: 1.0,
+            z: 0.0,
+        },
+    };
+    let expected_normal = Vec3 {
+        x: 0.0,
+        y: 0.0,
+        z: 1.0,
+    };
+    let result = t.normal();
+    assert_eq!(expected_normal, result);
 }
