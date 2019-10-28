@@ -4,304 +4,132 @@ use crate::math::vectors::VectorMath;
 
 #[test]
 fn test_vector_math_add() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: 2.5,
-        y: 2.,
-        z: -5.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(2.5, 2.0, -5.0);
     assert_eq!(a.add(&b), expected);
 }
 
 #[test]
 fn test_vector_math_sub() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: -0.5,
-        y: -2.,
-        z: 15.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(-0.5, -2.0, 15.0);
     assert_eq!(a - b, expected);
 }
 
 #[test]
 fn test_vector_math_mul() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: 1.5,
-        y: 0.,
-        z: -50.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(1.5, 0.0, -50.0);
     assert_eq!(a * b, expected);
 }
 
 #[test]
 fn test_vector_math_div() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 2.,
-        y: 2.,
-        z: 10.,
-    };
-    let expected = Vec3 {
-        x: 0.5,
-        y: 0.,
-        z: 0.5,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(2.0, 2.0, 10.0);
+    let expected = Vec3::new(0.5, 0.0, 0.5);
     assert_eq!(a / b, expected);
 }
 
 #[test]
 fn test_vector_math_div_by_zero() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 2.,
-        y: 2.,
-        z: 0.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(2.0, 2.0, 0.0);
     let result = std::panic::catch_unwind(|| a / b);
     assert!(result.is_err());
 }
 
 #[test]
 fn test_vector_math_cross() {
-    let a = Vec3 {
-        x: 1.,
-        y: 2.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 5.,
-        y: 1.,
-        z: 3.,
-    };
-    let expected = Vec3 {
-        x: 1.,
-        y: 22.,
-        z: -9.,
-    };
+    let a = Vec3::new(1.0, 2.0, 5.0);
+    let b = Vec3::new(5.0, 1.0, 3.0);
+    let expected = Vec3::new(1.0, 22.0, -9.0);
     assert_eq!(a.cross(&b), expected);
 }
 
 #[test]
 fn test_vector_math_scale() {
-    let a = Vec3 {
-        x: 1.,
-        y: 2.,
-        z: 5.,
-    };
+    let a = Vec3::new(1.0, 2.0, 5.0);
     let factor = 10.5;
-    let expected = Vec3 {
-        x: 10.5,
-        y: 21.,
-        z: 52.5,
-    };
+    let expected = Vec3::new(10.5, 21.0, 52.5);
     assert_eq!(a.scale(factor), expected);
 }
 
 #[test]
 fn test_vector_math_dot() {
-    let a = Vec3 {
-        x: 3.,
-        y: 2.2,
-        z: 8.,
-    };
-    let b = Vec3 {
-        x: 5.,
-        y: 1.,
-        z: 3.,
-    };
+    let a = Vec3::new(3.0, 2.2, 8.0);
+    let b = Vec3::new(5.0, 1.0, 3.0);
     let expected: f32 = 41.2;
     assert!(ulps_eq!(a.dot(&b), expected, max_ulps = 2));
 
-    let a = Vec3 {
-        x: 1.,
-        y: 1.,
-        z: 0.,
-    };
-    let b = Vec3 {
-        x: 0.,
-        y: 0.,
-        z: 1.,
-    };
+    let a = Vec3::new(1.0, 1.0, 0.0);
+    let b = Vec3::new(0.0, 0.0, 1.0);
     let expected: f32 = 0.;
     assert!(ulps_eq!(a.dot(&b), expected, max_ulps = 2));
 
-    let a = Vec3 {
-        x: 1.,
-        y: 1.,
-        z: 0.,
-    };
-    let b = Vec3 {
-        x: 0.,
-        y: 1.,
-        z: 0.,
-    };
+    let a = Vec3::new(1.0, 1.0, 0.0);
+    let b = Vec3::new(0.0, 1.0, 0.0);
     let expected: f32 = 1.;
     assert!(ulps_eq!(a.dot(&b), expected, max_ulps = 2));
 }
 
 #[test]
 fn test_vector_math_length() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 0.,
-    };
+    let a = Vec3::new(1.0, 0.0, 0.0);
     let expected: f32 = 1.;
     assert!(ulps_eq!(a.length(), expected, max_ulps = 2));
 
-    let a = Vec3 {
-        x: 1.,
-        y: 1.,
-        z: 0.,
-    };
+    let a = Vec3::new(1.0, 1.0, 0.0);
     let expected: f32 = 2_f32.sqrt();
     assert!(ulps_eq!(a.length(), expected, max_ulps = 2));
 }
 
 #[test]
 fn test_vector_math_norm() {
-    let a = Vec3 {
-        x: 1.,
-        y: 1.,
-        z: 0.,
-    };
-    let b = Vec3 {
-        x: 1_f32 / 2_f32.sqrt(),
-        y: 1_f32 / 2_f32.sqrt(),
-        z: 0_f32,
-    };
+    let a = Vec3::new(1.0, 1.0, 0.0);
+    let b = Vec3::new(1_f32 / 2_f32.sqrt(), 1_f32 / 2_f32.sqrt(), 0_f32);
     assert_eq!(a.norm(), b);
 }
 
 #[test]
 fn test_std_trait_add() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: 2.5,
-        y: 2.,
-        z: -5.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(2.5, 2.0, -5.0);
     assert_eq!(a + b, expected);
 }
 
 #[test]
 fn test_std_trait_sub() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: -0.5,
-        y: -2.,
-        z: 15.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(-0.5, -2.0, 15.0);
     assert_eq!(a - b, expected);
 }
 
 #[test]
 fn test_std_trait_mul() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 1.5,
-        y: 2.,
-        z: -10.,
-    };
-    let expected = Vec3 {
-        x: 1.5,
-        y: 0.,
-        z: -50.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(1.5, 2.0, -10.0);
+    let expected = Vec3::new(1.5, 0.0, -50.0);
     assert_eq!(a * b, expected);
 }
 
 #[test]
 fn test_std_trait_div() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 2.,
-        y: 2.,
-        z: 10.,
-    };
-    let expected = Vec3 {
-        x: 0.5,
-        y: 0.,
-        z: 0.5,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(2.0, 2.0, 10.0);
+    let expected = Vec3::new(0.5, 0.0, 0.5);
     assert_eq!(a / b, expected);
 }
 
 #[test]
 fn test_std_trait_div_by_zero() {
-    let a = Vec3 {
-        x: 1.,
-        y: 0.,
-        z: 5.,
-    };
-    let b = Vec3 {
-        x: 2.,
-        y: 2.,
-        z: 0.,
-    };
+    let a = Vec3::new(1.0, 0.0, 5.0);
+    let b = Vec3::new(2.0, 2.0, 0.0);
     let result = std::panic::catch_unwind(|| a / b);
     assert!(result.is_err());
 }
@@ -309,27 +137,11 @@ fn test_std_trait_div_by_zero() {
 #[test]
 fn test_triangle_normal() {
     let t = Triangle {
-        v1: Vec3 {
-            x: 0.0,
-            y: 0.0,
-            z: 0.0,
-        },
-        v2: Vec3 {
-            x: 1.0,
-            y: 0.0,
-            z: 0.0,
-        },
-        v3: Vec3 {
-            x: 1.0,
-            y: 1.0,
-            z: 0.0,
-        },
+        v1: Vec3::empty(),
+        v2: Vec3::new(1.0, 0.0, 0.0),
+        v3: Vec3::new(1.0, 1.0, 0.0),
     };
-    let expected_normal = Vec3 {
-        x: 0.0,
-        y: 0.0,
-        z: 1.0,
-    };
+    let expected_normal = Vec3::new(0.0, 0.0, 1.0);
     let result = t.normal();
     assert_eq!(expected_normal, result);
 }
