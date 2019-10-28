@@ -12,6 +12,19 @@ pub mod vectors {
         pub z: f32,
     }
 
+    impl Vec3 {
+        pub fn empty() -> Self {
+            Vec3 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+            }
+        }
+        pub fn new(x: f32, y: f32, z: f32) -> Self {
+            Vec3 { x, y, z }
+        }
+    }
+
     pub trait VectorMath {
         fn add(&self, other: &Self) -> Self;
         fn sub(&self, other: &Self) -> Self;
