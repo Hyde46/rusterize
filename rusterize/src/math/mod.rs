@@ -91,10 +91,6 @@ pub mod vectors {
             }
         }
         fn norm(&self) -> Self {
-            /*
-            Normalize Vector
-            n = u / length(u)
-            */
             let length = self.length();
             self.scale(1_f32 / length)
         }
