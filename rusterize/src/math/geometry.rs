@@ -21,6 +21,10 @@ pub struct Ray {
 
 #[derive(Debug, PartialEq)]
 pub struct IntersectionRecord {
+    // Implements DataStructure holding information about
+    // a point in 3D space where a ray may intersect with an other
+    // object. Offers all necessary information to calculate
+    // reflection properties
     pub normal: Vec3,
     pub distance: f32,
     pub hit_world: Vec3,
@@ -40,6 +44,9 @@ pub trait Intersectable {
 // %%%%%%%%%%%%%%%%%%%%%%%
 impl Intersectable for Triangle {
     fn intersects(&self, ray: &Ray, i_rec: &IntersectionRecord) -> bool {
+        // Calculates an intersection between a ray and a triangle
+        // Fills out IntersectionRecord if an intersection takes place
+        // Returns true if ray intersects with triangle and false if it does not
         let mut i_rec = IntersectionRecord::new();
 
         let (mut u, mut v, mut n) = (Vec3::empty(), Vec3::empty(), Vec3::empty());
@@ -74,6 +81,8 @@ impl Intersectable for Triangle {
             return false;
         }
         i_rec.hit_world = ray.origin.add(&ray.dir.scale(r));
+        i_rec.distance = i_rec.hit_world.sub(&ray.origin).length();
+        i_rec.normal = Vec3::new(n.x, n.y, n.z);
 
         //is point in triangle
         let (mut uu, mut uv, mut vv, mut wu, mut wv, mut D) = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
