@@ -21,7 +21,7 @@ Before you begin, ensure you have met the following requirements:
 
 ## How to build
 
-To build Rusterizer, follow these steps:
+Building the rusterizer, it's quiet easy:
 
 Linux and macOS:
 ```
@@ -35,7 +35,7 @@ To contribute, follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`. 
-3. Make your changes and commit them: `git commit -m '<commit_message>'
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
 4. Push to the original branch: `git push origin <project_name>/<location>`
 5. Create the pull request.
 6. Make sure Travis build is not failing.
