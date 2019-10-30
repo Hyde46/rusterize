@@ -1,10 +1,11 @@
 use crate::math::geometry::Intersectable;
-use crate::math::geometry::IntersectionRecord;
-use crate::math::geometry::Ray;
 use crate::math::geometry::Triangle;
 
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
+
+use crate::renderer::renderstructs::IntersectionRecord;
+use crate::renderer::renderstructs::Ray;
 
 #[test]
 fn test_vector_math_add() {

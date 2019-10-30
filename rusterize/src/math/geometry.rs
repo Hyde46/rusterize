@@ -1,6 +1,10 @@
 use crate::math::vectors::*;
 
+use crate::renderer::renderstructs::Ray;
+use crate::renderer::renderstructs::IntersectionRecord;
+
 const EPSILON: f32 = 0.00002_f32;
+
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%%   Structs    %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
@@ -11,34 +15,12 @@ pub struct Triangle {
     pub v3: Vec3,
 }
 
-#[derive(Debug, PartialEq)]
-pub struct Ray {
-    pub origin: Vec3,
-    pub dir: Vec3,
-    pub min_dist: f32,
-    pub max_dist: f32,
-}
-
-#[derive(Debug, PartialEq)]
-pub struct IntersectionRecord {
-    // Implements DataStructure holding information about
-    // a point in 3D space where a ray may intersect with an other
-    // object. Offers all necessary information to calculate
-    // reflection properties
-    pub normal: Vec3,
-    pub distance: f32,
-    pub hit_world: Vec3,
-    pub hit_object: Vec3,
-    pub hit: bool,
-}
-
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%%   traits     %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
 pub trait Intersectable {
     fn intersects(&self, ray: &Ray, i_rec: &IntersectionRecord) -> bool;
 }
-
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%% trait impl   %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
@@ -112,18 +94,6 @@ impl Intersectable for Triangle {
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%% struct impl  %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
-impl IntersectionRecord {
-    pub fn new() -> Self {
-        IntersectionRecord {
-            normal: Vec3::empty(),
-            distance: 0.0,
-            hit_world: Vec3::empty(),
-            hit_object: Vec3::empty(),
-            hit: false,
-        }
-    }
-}
-
 impl Triangle {
     pub fn new(v1: Vec3, v2: Vec3, v3: Vec3) -> Self {
         Triangle { v1, v2, v3 }
@@ -132,15 +102,5 @@ impl Triangle {
         let a: Vec3 = self.v2.sub(&self.v1);
         let b: Vec3 = self.v3.sub(&self.v1);
         a.cross(&b).norm()
-    }
-}
-impl Ray {
-    pub fn new(origin: Vec3, dir: Vec3, min_dist: f32, max_dist: f32) -> Self {
-        Ray {
-            origin,
-            dir,
-            min_dist,
-            max_dist,
-        }
     }
 }

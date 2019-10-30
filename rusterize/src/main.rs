@@ -1,4 +1,6 @@
 mod math;
+mod renderer;
+mod scene;
 
 #[macro_use]
 extern crate approx;
@@ -9,6 +11,8 @@ extern crate vecmath;
 
 use piston_window::*;
 use vecmath::*;
+
+use crate::scene::Scene;
 
 fn main() {
     let opengl = OpenGL::V3_2;
@@ -30,14 +34,19 @@ fn main() {
 
     let mut last_pos: Option<[f64; 2]> = None;
 
+    let scene = Scene::single_triangle();
+
+    let mut updated = false;
+
     while let Some(e) = window.next() {
         if let Some(_) = e.render_args() {
             texture.update(&mut texture_context, &canvas).unwrap();
             window.draw_2d(&e, |c, g, device| {
                 // Update texture before rendering.
                 texture_context.encoder.flush(device);
-
                 clear([1.0; 4], g);
+
+                //canvas.put_pixel(index%600, index%600, im::Rgba([(index % 255) as u8, 0, 0, 255]));
                 image(&texture, c.transform, g);
             });
         }
