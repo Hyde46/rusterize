@@ -30,6 +30,8 @@ $ cargo build --release
 
 and the executable will be in target/release/rusterize.
 
+(Windows will follow)
+
 ## Contributing
 To contribute, follow these steps:
 
