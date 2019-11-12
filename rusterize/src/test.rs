@@ -96,7 +96,7 @@ fn test_vector_math_length() {
 fn test_vector_math_norm() {
     let a = Vec3::new(1.0, 1.0, 0.0);
     let b = Vec3::new(1_f32 / 2_f32.sqrt(), 1_f32 / 2_f32.sqrt(), 0_f32);
-    assert_eq!(a.norm(), b);
+    assert_eq!(a.normalize(), b);
 }
 
 #[test]
