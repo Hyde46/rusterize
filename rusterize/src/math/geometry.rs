@@ -100,6 +100,6 @@ impl Triangle {
     pub fn normal(&self) -> Vec3 {
         let a: Vec3 = self.v2.sub(&self.v1);
         let b: Vec3 = self.v3.sub(&self.v1);
-        a.cross(&b).norm()
+        a.cross(&b).normalize()
     }
 }
