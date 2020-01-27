@@ -50,7 +50,8 @@ fn main() {
 
     match RENDER_TYPE {
         rasterizer => (),
-        raytracer => (render_scene(&canvas, &scene, &cam)),
+        raytracer => (),
+        //raytracer => (render_scene(canvas, &scene, &cam)),
     }
 
     while let Some(e) = window.next() {

@@ -2,8 +2,10 @@
     "cSpell.words": [
         "EPISLON",
         "Intersectable",
+        "Rgba",
         "Structs",
         "powf",
+        "rasterizer",
         "raytracer",
         "renderstructs",
         "rusterize",
