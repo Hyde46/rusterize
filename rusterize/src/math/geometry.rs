@@ -1,7 +1,7 @@
 use crate::math::vectors::*;
 
-use crate::renderer::renderstructs::Ray;
 use crate::renderer::renderstructs::IntersectionRecord;
+use crate::renderer::renderstructs::Ray;
 
 const EPSILON: f32 = 0.00002_f32;
 
@@ -67,22 +67,21 @@ impl Intersectable for Triangle {
         i_rec.normal = Vec3::new(n.x, n.y, n.z);
 
         //is point in triangle
-        let (mut uu, mut uv, mut vv, mut wu, mut wv, mut D) = (0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-        uu = u.dot(&u);
-        uv = u.dot(&v);
-        vv = v.dot(&v);
+        let uu = u.dot(&u);
+        let uv = u.dot(&v);
+        let vv = v.dot(&v);
         w = i_rec.hit_world.sub(&self.v1);
-        wu = w.dot(&u);
-        wv = w.dot(&v);
-        D = uv * uv - uu * vv;
+        let wu = w.dot(&u);
+        let wv = w.dot(&v);
+        let d = uv * uv - uu * vv;
 
         // get and test parametric coords
-        let s = (uv * wv - vv * wu) / D;
+        let s = (uv * wv - vv * wu) / d;
         if s < 0.0 || s > 1.0 {
             // I is outside T
             return false;
         }
-        let t = (uv * wu - uu * wv) / D;
+        let t = (uv * wu - uu * wv) / d;
         if t < 0.0 || (s + t) > 1.0 {
             // I is outside T
             return false;

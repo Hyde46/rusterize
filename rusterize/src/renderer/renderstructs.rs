@@ -22,6 +22,12 @@ pub struct IntersectionRecord {
     pub hit: bool,
 }
 
+pub struct Camera {
+    pub direction: Vec3,
+    pub position: Vec3,
+    pub up: Vec3,
+    pub focal_length: f32,
+}
 
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%% struct impl  %%%%%
@@ -45,6 +51,17 @@ impl Ray {
             dir,
             min_dist,
             max_dist,
+        }
+    }
+}
+
+impl Camera {
+    pub fn new(direction: Vec3, position: Vec3, up: Vec3, focal_length: f32) -> Self {
+        Camera {
+            direction,
+            position,
+            up,
+            focal_length,
         }
     }
 }

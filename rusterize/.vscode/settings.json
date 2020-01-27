@@ -4,6 +4,8 @@
         "Intersectable",
         "Structs",
         "powf",
+        "raytracer",
+        "renderstructs",
         "rusterize",
         "ulps"
     ],
