@@ -1,6 +1,7 @@
 mod math;
 mod renderer;
 mod scene;
+mod utils;
 
 #[macro_use]
 extern crate approx;
@@ -10,9 +11,17 @@ extern crate piston_window;
 extern crate vecmath;
 
 use piston_window::*;
-use vecmath::*;
+use renderer::raytracer::render_scene;
+use renderer::renderstructs::Camera;
+use utils::RenderType;
+
+use crate::math::vectors::Vec3;
 
 use crate::scene::Scene;
+
+const RENDER_TYPE: RenderType = RenderType::raytracer;
+
+pub type RgbaImage = im::ImageBuffer<im::Rgba<u8>, Vec<u8>>;
 
 fn main() {
     let opengl = OpenGL::V3_2;
@@ -35,8 +44,14 @@ fn main() {
     let mut last_pos: Option<[f64; 2]> = None;
 
     let scene = Scene::single_triangle();
+    let cam = Camera::new(Vec3::empty(), Vec3::empty(), Vec3::empty(), 0.0);
 
     let mut updated = false;
+
+    match RENDER_TYPE {
+        rasterizer => (),
+        raytracer => (render_scene(&canvas, &scene, &cam)),
+    }
 
     while let Some(e) = window.next() {
         if let Some(_) = e.render_args() {
