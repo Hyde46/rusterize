@@ -1,7 +1,16 @@
 use crate::math::vectors::Vec3;
 
 trait Camera {
-    fn sample_pixel(&self, x: f32, y: f32) -> Vec3;
+    fn sample_pixel(&self, u: f32, v: f32) -> CameraSample;
+    fn generate_ray(&self, camera_sample: CameraSample) -> Vec3;
+}
+
+#[derive(Debug, PartialEq)]
+pub struct CameraSample {
+    pub image_x: f32,
+    pub image_y: f32,
+    pub lens_u: f32,
+    pub lens_v: f32,
 }
 
 #[derive(Debug, PartialEq)]
@@ -35,6 +44,17 @@ pub struct OrthogonalCamera {
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%% struct impl  %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
+impl CameraSample {
+    pub fn new() -> Self {
+        CameraSample {
+            image_x: 0.0,
+            image_y: 0.0,
+            lens_u: 0.0,
+            lens_v: 0.0,
+        }
+    }
+}
+
 impl IntersectionRecord {
     pub fn new() -> Self {
         IntersectionRecord {
@@ -70,8 +90,13 @@ impl OrthogonalCamera {
 }
 
 impl Camera for OrthogonalCamera {
-    fn sample_pixel(&self, x: f32, y: f32) -> Vec3 {
+    fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
         //TODO: Actually sample image plane by pixel (x,y) return world coordinates
-        Vec3::new(x, y, 0.0)
+        CameraSample::new()
+    }
+
+    fn generate_ray(&self, camera_sample: CameraSample) -> Vec3 {
+        //TODO: Generate ray based on camera sample
+        Vec3::new(0.0, 0.0, 0.0)
     }
 }
