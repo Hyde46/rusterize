@@ -1,12 +1,11 @@
-use crate::renderer::renderstructs::Camera;
+use crate::renderer::renderstructs::OrthogonalCamera;
 use crate::scene::Scene;
 
 pub type RgbaImage = im::ImageBuffer<image::Rgba<u8>, Vec<u8>>;
 
-pub fn render_scene(buffer: RgbaImage, _scene: &Scene, _cam: &Camera) {
+pub fn render_scene(mut buffer: RgbaImage, _scene: &Scene, _cam: &OrthogonalCamera) -> RgbaImage {
     // Iterate over all pixels, sample each pixel and produce num of samples ray per pixel.
     // Call integrator per pixel based on ray
-    /*
     for x in 0..buffer.width() {
         for y in 0..buffer.height() {
             //Sample pixel (x,y)
@@ -23,5 +22,5 @@ pub fn render_scene(buffer: RgbaImage, _scene: &Scene, _cam: &Camera) {
             );
         }
     }
-    buffer*/
+    buffer
 }

@@ -22,7 +22,7 @@ pub struct IntersectionRecord {
     pub hit: bool,
 }
 
-pub struct Camera {
+pub struct OrthogonalCamera {
     pub direction: Vec3,
     pub position: Vec3,
     pub up: Vec3,
@@ -55,9 +55,9 @@ impl Ray {
     }
 }
 
-impl Camera {
+impl OrthogonalCamera {
     pub fn new(direction: Vec3, position: Vec3, up: Vec3, focal_length: f32) -> Self {
-        Camera {
+        OrthogonalCamera {
             direction,
             position,
             up,

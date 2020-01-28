@@ -12,7 +12,7 @@ extern crate vecmath;
 
 use piston_window::*;
 use renderer::raytracer::render_scene;
-use renderer::renderstructs::Camera;
+use renderer::renderstructs::OrthogonalCamera;
 use utils::RenderType;
 
 use crate::math::vectors::Vec3;
@@ -44,15 +44,10 @@ fn main() {
     let mut last_pos: Option<[f64; 2]> = None;
 
     let scene = Scene::single_triangle();
-    let cam = Camera::new(Vec3::empty(), Vec3::empty(), Vec3::empty(), 0.0);
+    let cam = OrthogonalCamera::new(Vec3::empty(), Vec3::empty(), Vec3::empty(), 0.0);
 
-    let mut updated = false;
-
-    match RENDER_TYPE {
-        rasterizer => (),
-        raytracer => (),
-        //raytracer => (render_scene(canvas, &scene, &cam)),
-    }
+    //TODO: replace code with renderer based on RENDER_TYPE
+    canvas = render_scene(canvas, &scene, &cam);
 
     while let Some(e) = window.next() {
         if let Some(_) = e.render_args() {
