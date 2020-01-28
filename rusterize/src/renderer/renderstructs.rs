@@ -1,5 +1,8 @@
 use crate::math::vectors::Vec3;
-use crate::math::vectors::VectorMath;
+
+trait Camera {
+    fn sample_pixel(&self, x: f32, y: f32) -> Vec3;
+}
 
 #[derive(Debug, PartialEq)]
 pub struct Ray {
@@ -63,5 +66,12 @@ impl OrthogonalCamera {
             up,
             focal_length,
         }
+    }
+}
+
+impl Camera for OrthogonalCamera {
+    fn sample_pixel(&self, x: f32, y: f32) -> Vec3 {
+        //TODO: Actually sample image plane by pixel (x,y) return world coordinates
+        Vec3::new(x, y, 0.0)
     }
 }
