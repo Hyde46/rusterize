@@ -95,7 +95,7 @@ impl Camera for OrthogonalCamera {
         CameraSample::new()
     }
 
-    fn generate_ray(&self, camera_sample: CameraSample) -> Vec3 {
+    fn generate_ray(&self, _camera_sample: CameraSample) -> Vec3 {
         //TODO: Generate ray based on camera sample
         Vec3::new(0.0, 0.0, 0.0)
     }

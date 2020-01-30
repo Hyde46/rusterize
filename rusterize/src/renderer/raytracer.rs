@@ -9,17 +9,11 @@ pub fn render_scene(mut buffer: RgbaImage, _scene: &Scene, _cam: &OrthogonalCame
     for x in 0..buffer.width() {
         for y in 0..buffer.height() {
             //Sample pixel (x,y)
-
             //Generate ray with origin cam
 
             //Integrate over scene and add to cumulative L_i
-
             //Write L_i to buffer at (x,y)
-            buffer.put_pixel(
-                x,
-                y,
-                im::Rgba([(x % 255) as u8, (2 * y % 255) as u8, 0, 255]),
-            );
+            buffer.put_pixel(x, y, im::Rgba([(x % 600) as u8, (y % 600) as u8, 0, 255]));
         }
     }
     buffer
