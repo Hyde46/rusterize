@@ -8,7 +8,7 @@ const EPSILON: f32 = 0.00002_f32;
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%%   Structs    %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Triangle {
     pub v1: Vec3,
     pub v2: Vec3,

@@ -5,7 +5,7 @@ pub mod vectors {
     use std::f32;
     use std::ops::{Add, Div, Mul, Sub};
 
-    #[derive(Debug, PartialEq)]
+    #[derive(Debug, PartialEq, Clone)]
     pub struct Vec3 {
         pub x: f32,
         pub y: f32,

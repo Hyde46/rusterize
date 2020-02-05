@@ -2,7 +2,7 @@ use crate::math::vectors::Vec3;
 
 trait Camera {
     fn sample_pixel(&self, u: f32, v: f32) -> CameraSample;
-    fn generate_ray(&self, camera_sample: CameraSample) -> Vec3;
+    fn generate_ray(&self, camera_sample: CameraSample) -> Ray;
 }
 
 #[derive(Debug, PartialEq)]
@@ -13,7 +13,7 @@ pub struct CameraSample {
     pub lens_v: f32,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct Ray {
     pub origin: Vec3,
     pub dir: Vec3,
@@ -95,8 +95,13 @@ impl Camera for OrthogonalCamera {
         CameraSample::new()
     }
 
-    fn generate_ray(&self, _camera_sample: CameraSample) -> Vec3 {
+    fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
         //TODO: Generate ray based on camera sample
-        Vec3::new(0.0, 0.0, 0.0)
+        Ray::new(
+            self.position.clone() + Vec3::new(camera_sample.image_x, camera_sample.image_y, 0f32),
+            self.direction.clone(),
+            0_f32,
+            10000_f32,
+        )
     }
 }
