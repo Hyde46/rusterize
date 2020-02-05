@@ -1,12 +1,17 @@
 use crate::math::vectors::Vec3;
 
 trait Camera {
+    // General Camera trait
+    // Every type of camera has to be able to get sampled for rays
     fn sample_pixel(&self, u: f32, v: f32) -> CameraSample;
     fn generate_ray(&self, camera_sample: CameraSample) -> Ray;
 }
 
 #[derive(Debug, PartialEq)]
 pub struct CameraSample {
+    // Sample in camera
+    // Image_x image_y are sample on image Plane
+    // lens_u lens_v samples on the lens of the camera
     pub image_x: f32,
     pub image_y: f32,
     pub lens_u: f32,
@@ -15,6 +20,7 @@ pub struct CameraSample {
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Ray {
+    // Ray struct to model rays traversing in the scene
     pub origin: Vec3,
     pub dir: Vec3,
     pub min_dist: f32,
@@ -91,7 +97,6 @@ impl OrthogonalCamera {
 
 impl Camera for OrthogonalCamera {
     fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
-        //TODO: Actually sample image plane by pixel (x,y) return world coordinates
         CameraSample::new()
     }
 

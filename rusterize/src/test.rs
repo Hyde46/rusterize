@@ -199,3 +199,13 @@ fn test_ray_hit_triangle_not_in_triangle() {
     let ray = Ray::new(origin, dir, 10000.0, 100_000.0);
     assert!(!t.intersects(&ray, &i_rec));
 }
+
+/*
+#[test]
+fn generate_orthographic_ray() {
+    let origin = Vec3::new(0.0, 0.0, 0.0);
+    let dir = Vec3::new(0.0, 0.0, 1.0);
+    let up = Vec3::new(0.0, 1.0, 0.0);
+    let cam = OrthogonalCamera::new(origin, dir, up, 1.0_f32);
+}
+*/
