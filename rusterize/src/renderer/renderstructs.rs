@@ -59,6 +59,14 @@ impl CameraSample {
             lens_v: 0.0,
         }
     }
+    pub fn new_image_plane(x: f32, y: f32) -> Self {
+        CameraSample {
+            image_x: x,
+            image_y: y,
+            lens_u: 0.0,
+            lens_v: 0.0,
+        }
+    }
 }
 
 impl IntersectionRecord {
@@ -93,14 +101,7 @@ impl OrthogonalCamera {
             focal_length,
         }
     }
-}
-
-impl Camera for OrthogonalCamera {
-    fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
-        CameraSample::new()
-    }
-
-    fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
+    pub fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
         //TODO: Generate ray based on camera sample
         Ray::new(
             self.position.clone() + Vec3::new(camera_sample.image_x, camera_sample.image_y, 0f32),
@@ -108,5 +109,8 @@ impl Camera for OrthogonalCamera {
             0_f32,
             10000_f32,
         )
+    }
+    pub fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
+        CameraSample::new_image_plane(u, v)
     }
 }

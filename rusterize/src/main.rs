@@ -44,7 +44,12 @@ fn main() {
     let mut last_pos: Option<[f64; 2]> = None;
 
     let scene = Scene::single_triangle();
-    let cam = OrthogonalCamera::new(Vec3::empty(), Vec3::empty(), Vec3::empty(), 0.0);
+    let cam = OrthogonalCamera::new(
+        Vec3::new(0.0, 0.0, -1.0),
+        Vec3::new(0.0, 0.0, -2.0),
+        Vec3::new(0.0, 1.0, 0.0),
+        20.0,
+    );
 
     //TODO: replace code with renderer based on RENDER_TYPE
     canvas = render_scene(canvas, &scene, &cam);
