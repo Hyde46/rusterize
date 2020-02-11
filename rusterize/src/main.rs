@@ -45,15 +45,17 @@ fn main() {
 
     let scene = Scene::single_triangle();
     let cam = OrthogonalCamera::new(
-        Vec3::new(0.0, 0.0, -1.0),
-        Vec3::new(0.0, 0.0, -2.0),
+        Vec3::new(0.0, 0.0, 1.0),
+        Vec3::new(0.0, 0.0, -5.0),
         Vec3::new(0.0, 1.0, 0.0),
         20.0,
     );
 
     //TODO: replace code with renderer based on RENDER_TYPE
     canvas = render_scene(canvas, &scene, &cam);
-
+    canvas
+        .save_with_format("./result", im::ImageFormat::PNG)
+        .unwrap();
     while let Some(e) = window.next() {
         if let Some(_) = e.render_args() {
             texture.update(&mut texture_context, &canvas).unwrap();

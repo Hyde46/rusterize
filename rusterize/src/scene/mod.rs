@@ -12,9 +12,9 @@ impl Scene {
     pub fn single_triangle() -> Self {
         let mut vec = Vec::new();
         vec.push(Triangle::new(
-            Vec3::new(0.0, 0.0, 1.0),
-            Vec3::new(2.0, 2.0, 1.0),
-            Vec3::new(2.0, 0.0, 1.0),
+            Vec3::new(-100.0, 0.0, 1.0),
+            Vec3::new(0.0, 100.0, 1.0),
+            Vec3::new(100.0, 0.0, 1.0),
         ));
         Scene { triangles: vec }
     }
