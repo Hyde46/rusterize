@@ -104,7 +104,12 @@ impl OrthogonalCamera {
     pub fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
         //TODO: Generate ray based on camera sample
         Ray::new(
-            self.position.clone() + Vec3::new(camera_sample.image_x, camera_sample.image_y, 0f32),
+            self.position.clone()
+                + Vec3::new(
+                    camera_sample.image_x - 300_f32, //TODO: Replace with not hardcoded stuff
+                    camera_sample.image_y - 300_f32,
+                    0f32,
+                ),
             self.direction.clone(),
             0_f32,
             10000_f32,
