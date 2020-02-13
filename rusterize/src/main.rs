@@ -32,33 +32,32 @@ fn main() {
         .build()
         .unwrap();
 
-    let mut canvas = im::ImageBuffer::new(width, height);
     let mut draw = false;
     let mut texture_context = TextureContext {
         factory: window.factory.clone(),
         encoder: window.factory.create_command_buffer().into(),
     };
-    let mut texture: G2dTexture =
-        Texture::from_image(&mut texture_context, &canvas, &TextureSettings::new()).unwrap();
-
-    let mut last_pos: Option<[f64; 2]> = None;
 
     let scene = Scene::single_triangle();
-    let cam = OrthogonalCamera::new(
+    let mut cam = OrthogonalCamera::new(
         Vec3::new(0.0, 0.0, 1.0),
         Vec3::new(0.0, 0.0, -5.0),
         Vec3::new(0.0, 1.0, 0.0),
         20.0,
+        width,
+        height,
     );
 
+    let mut texture: G2dTexture =
+        Texture::from_image(&mut texture_context, &cam.film, &TextureSettings::new()).unwrap();
+
+    let mut last_pos: Option<[f64; 2]> = None;
+
     //TODO: replace code with renderer based on RENDER_TYPE
-    canvas = render_scene(canvas, &scene, &cam);
-    canvas
-        .save_with_format("./result", im::ImageFormat::PNG)
-        .unwrap();
+    render_scene(&scene, &mut cam);
     while let Some(e) = window.next() {
         if let Some(_) = e.render_args() {
-            texture.update(&mut texture_context, &canvas).unwrap();
+            texture.update(&mut texture_context, &cam.film).unwrap();
             window.draw_2d(&e, |c, g, device| {
                 // Update texture before rendering.
                 texture_context.encoder.flush(device);

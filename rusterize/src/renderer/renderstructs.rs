@@ -1,6 +1,9 @@
 use crate::math::vectors::Vec3;
 
-trait Camera {
+extern crate image as im;
+pub type RgbaImage = im::ImageBuffer<im::Rgba<u8>, Vec<u8>>;
+
+trait RayGenerator {
     // General Camera trait
     // Every type of camera has to be able to get sampled for rays
     fn sample_pixel(&self, u: f32, v: f32) -> CameraSample;
@@ -45,6 +48,9 @@ pub struct OrthogonalCamera {
     pub position: Vec3,
     pub up: Vec3,
     pub focal_length: f32,
+    pub film_width: u32,
+    pub film_height: u32,
+    pub film: RgbaImage,
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%
@@ -93,12 +99,23 @@ impl Ray {
 }
 
 impl OrthogonalCamera {
-    pub fn new(direction: Vec3, position: Vec3, up: Vec3, focal_length: f32) -> Self {
+    pub fn new(
+        direction: Vec3,
+        position: Vec3,
+        up: Vec3,
+        focal_length: f32,
+        film_width: u32,
+        film_height: u32,
+    ) -> Self {
+        let film = RgbaImage::new(film_width, film_height);
         OrthogonalCamera {
             direction,
             position,
             up,
             focal_length,
+            film_width,
+            film_height,
+            film,
         }
     }
     pub fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
