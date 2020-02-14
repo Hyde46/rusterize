@@ -14,7 +14,7 @@ impl Scene {
         vec.push(Triangle::new(
             Vec3::new(-100.0, 0.0, 1.0),
             Vec3::new(0.0, 100.0, 1.0),
-            Vec3::new(100.0, 0.0, 1.0),
+            Vec3::new(100.0, 0.0, 2.0),
         ));
         Scene { triangles: vec }
     }

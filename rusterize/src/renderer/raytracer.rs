@@ -1,10 +1,11 @@
 use crate::renderer::renderstructs::IntersectionRecord;
 use crate::renderer::renderstructs::OrthogonalCamera;
+use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
 
 pub type RgbaImage = im::ImageBuffer<image::Rgba<u8>, Vec<u8>>;
 
-pub fn render_scene(scene: &Scene, cam: &mut OrthogonalCamera) {
+pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
     let mut buffer = RgbaImage::new(cam.film_width, cam.film_height);
     // Iterate over all pixels, sample each pixel and produce num of samples ray per pixel.
     // Call integrator per pixel based on ray

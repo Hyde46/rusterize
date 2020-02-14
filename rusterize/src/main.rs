@@ -13,6 +13,7 @@ extern crate vecmath;
 use piston_window::*;
 use renderer::raytracer::render_scene;
 use renderer::renderstructs::OrthogonalCamera;
+use renderer::renderstructs::PerspectiveCamera;
 use utils::RenderType;
 
 use crate::math::vectors::Vec3;
@@ -39,11 +40,11 @@ fn main() {
     };
 
     let scene = Scene::single_triangle();
-    let mut cam = OrthogonalCamera::new(
+    let mut cam = PerspectiveCamera::new(
         Vec3::new(0.0, 0.0, 1.0),
-        Vec3::new(0.0, 0.0, -5.0),
+        Vec3::new(0.0, 0.0, -50.0),
         Vec3::new(0.0, 1.0, 0.0),
-        20.0,
+        40.0,
         width,
         height,
     );
@@ -62,8 +63,6 @@ fn main() {
                 // Update texture before rendering.
                 texture_context.encoder.flush(device);
                 clear([1.0; 4], g);
-
-                //canvas.put_pixel(index%600, index%600, im::Rgba([(index % 255) as u8, 0, 0, 255]));
                 image(&texture, c.transform, g);
             });
         }

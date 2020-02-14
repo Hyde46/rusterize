@@ -1,4 +1,5 @@
 use crate::math::vectors::Vec3;
+use crate::math::vectors::VectorMath;
 
 extern crate image as im;
 pub type RgbaImage = im::ImageBuffer<im::Rgba<u8>, Vec<u8>>;
@@ -44,6 +45,16 @@ pub struct IntersectionRecord {
 }
 
 pub struct OrthogonalCamera {
+    pub direction: Vec3,
+    pub position: Vec3,
+    pub up: Vec3,
+    pub focal_length: f32,
+    pub film_width: u32,
+    pub film_height: u32,
+    pub film: RgbaImage,
+}
+
+pub struct PerspectiveCamera {
     pub direction: Vec3,
     pub position: Vec3,
     pub up: Vec3,
@@ -128,6 +139,47 @@ impl OrthogonalCamera {
                     0f32,
                 ),
             self.direction.clone(),
+            0_f32,
+            10000_f32,
+        )
+    }
+    pub fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
+        CameraSample::new_image_plane(u, v)
+    }
+}
+
+impl PerspectiveCamera {
+    pub fn new(
+        direction: Vec3,
+        position: Vec3,
+        up: Vec3,
+        focal_length: f32,
+        film_width: u32,
+        film_height: u32,
+    ) -> Self {
+        let film = RgbaImage::new(film_width, film_height);
+        PerspectiveCamera {
+            direction,
+            position,
+            up,
+            focal_length,
+            film_width,
+            film_height,
+            film,
+        }
+    }
+    pub fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
+        //TODO: Generate ray based on camera sample
+
+        let pixel_position = (self.direction.clone()).scale(self.focal_length)
+            + Vec3::new(
+                camera_sample.image_x - 300_f32,
+                camera_sample.image_y - 300_f32,
+                0f32,
+            );
+        Ray::new(
+            self.position.clone(),
+            pixel_position - self.position.clone(),
             0_f32,
             10000_f32,
         )
