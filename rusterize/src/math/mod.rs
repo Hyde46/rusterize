@@ -3,6 +3,7 @@ pub mod matrices;
 pub mod vectors {
 
     use std::f32;
+    use std::iter::Sum;
     use std::ops::{Add, Div, Mul, Sub};
 
     #[derive(Debug, PartialEq, Clone)]
@@ -141,6 +142,26 @@ pub mod vectors {
                 y: self.y / other.y,
                 z: self.z / other.z,
             }
+        }
+    }
+
+    impl<'a> Sum<&'a Self> for Vec3 {
+        fn sum<I>(iter: I) -> Self
+        where
+            I: Iterator<Item = &'a Self>,
+        {
+            iter.fold(
+                Self {
+                    x: 0.0,
+                    y: 0.0,
+                    z: 0.0,
+                },
+                |a, b| Self {
+                    x: a.x + b.x,
+                    y: a.y + b.y,
+                    z: a.z + b.z,
+                },
+            )
         }
     }
 
