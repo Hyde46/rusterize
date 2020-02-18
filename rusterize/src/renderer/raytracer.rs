@@ -5,9 +5,13 @@ use crate::renderer::renderstructs::OrthogonalCamera;
 use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
 
+extern crate rand;
+use rand::prelude::*;
+
 pub type RgbaImage = im::ImageBuffer<image::Rgba<u8>, Vec<u8>>;
 
 pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
+    let mut rng = rand::thread_rng();
     let mut buffer = RgbaImage::new(cam.film_width, cam.film_height);
     // Iterate over all pixels, sample each pixel and produce num of samples ray per pixel.
     // Call integrator per pixel based on ray
@@ -20,7 +24,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
             for sample in 0..scene.samples_per_pixel {
                 //Sample pixel (x,y)
                 //Generate ray with origin cam
-                let camera_sample = cam.sample_pixel(x as f32, y as f32);
+                let camera_sample = cam.sample_pixel(x as f32, y as f32, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
                 let i_rec = IntersectionRecord::new();
 

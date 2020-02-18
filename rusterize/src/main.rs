@@ -5,7 +5,6 @@ mod utils;
 
 #[macro_use]
 extern crate approx;
-
 extern crate image as im;
 extern crate piston_window;
 extern crate vecmath;

@@ -2,6 +2,8 @@ use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
 
 extern crate image as im;
+extern crate rand;
+use rand::prelude::*;
 pub type RgbaImage = im::ImageBuffer<im::Rgba<u8>, Vec<u8>>;
 
 trait RayGenerator {
@@ -143,8 +145,10 @@ impl OrthogonalCamera {
             10000_f32,
         )
     }
-    pub fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
-        CameraSample::new_image_plane(u, v)
+    pub fn sample_pixel(&self, u: f32, v: f32, rng: &mut ThreadRng) -> CameraSample {
+        let x_rnd: f32 = rng.gen();
+        let y_rnd: f32 = rng.gen();
+        CameraSample::new_image_plane(u + x_rnd, v + y_rnd)
     }
 }
 
@@ -184,7 +188,9 @@ impl PerspectiveCamera {
             10000_f32,
         )
     }
-    pub fn sample_pixel(&self, u: f32, v: f32) -> CameraSample {
-        CameraSample::new_image_plane(u, v)
+    pub fn sample_pixel(&self, u: f32, v: f32, rng: &mut ThreadRng) -> CameraSample {
+        let x_rnd: f32 = rng.gen();
+        let y_rnd: f32 = rng.gen();
+        CameraSample::new_image_plane(u + x_rnd, v + y_rnd)
     }
 }
