@@ -19,17 +19,17 @@ pub struct Triangle {
 // %%%%   traits     %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
 pub trait Intersectable {
-    fn intersects(&self, ray: &Ray, i_rec: &IntersectionRecord) -> bool;
+    fn intersects(&self, ray: &Ray, i_rec: &mut IntersectionRecord) -> bool;
 }
 // %%%%%%%%%%%%%%%%%%%%%%%
 // %%%% trait impl   %%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%
 impl Intersectable for Triangle {
-    fn intersects(&self, ray: &Ray, i_rec: &IntersectionRecord) -> bool {
+    #[warn(clippy::many_single_char_names)]
+    fn intersects(&self, ray: &Ray, i_rec: &mut IntersectionRecord) -> bool {
         // Calculates an intersection between a ray and a triangle
         // Fills out IntersectionRecord if an intersection takes place
         // Returns true if ray intersects with triangle and false if it does not
-        let mut i_rec = IntersectionRecord::new();
 
         let (mut u, mut v, mut n) = (Vec3::empty(), Vec3::empty(), Vec3::empty());
         let (mut dir, mut w0, mut w) = (Vec3::empty(), Vec3::empty(), Vec3::empty());
@@ -64,7 +64,7 @@ impl Intersectable for Triangle {
         }
         i_rec.hit_world = ray.origin.add(&ray.dir.scale(r));
         i_rec.distance = i_rec.hit_world.sub(&ray.origin).length();
-        i_rec.normal = Vec3::new(n.x, n.y, n.z);
+        i_rec.normal = Vec3::new(n.x, n.y, n.z).normalize();
 
         //is point in triangle
         let uu = u.dot(&u);
@@ -86,6 +86,7 @@ impl Intersectable for Triangle {
             // I is outside T
             return false;
         }
+        i_rec.hit = true;
         true
     }
 }

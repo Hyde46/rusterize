@@ -23,7 +23,7 @@ impl Scene {
         }
     }
 
-    pub fn intersect(&self, ray: &Ray, i_rec: &IntersectionRecord) -> bool {
+    pub fn intersect(&self, ray: &Ray, i_rec: &mut IntersectionRecord) -> bool {
         for t in &self.triangles {
             if t.intersects(ray, i_rec) {
                 return true;

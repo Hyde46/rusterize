@@ -1,12 +1,10 @@
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
 use crate::renderer::renderstructs::IntersectionRecord;
-use crate::renderer::renderstructs::OrthogonalCamera;
 use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
 
 extern crate rand;
-use rand::prelude::*;
 
 pub type RgbaImage = im::ImageBuffer<image::Rgba<u8>, Vec<u8>>;
 
@@ -21,14 +19,15 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
             //Start with dark pixel
             pixel_buffer.push(Vec3::new(0.0, 0.0, 0.0));
 
-            for sample in 0..scene.samples_per_pixel {
+            for _ in 0..scene.samples_per_pixel {
                 //Sample pixel (x,y)
                 //Generate ray with origin cam
                 let camera_sample = cam.sample_pixel(x as f32, y as f32, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
-                let i_rec = IntersectionRecord::new();
+                let mut i_rec = IntersectionRecord::new();
 
-                if scene.intersect(&ray, &i_rec) {
+                if scene.intersect(&ray, &mut i_rec) {
+                    println!("In raytracer: {:?}", i_rec);
                     pixel_buffer.push(Vec3::new(1.0, 1.0, 1.0));
                     //buffer.put_pixel(x, y, im::Rgba([255 as u8, 255 as u8, 255, 255]));
                 }

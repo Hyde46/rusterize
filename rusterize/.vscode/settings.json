@@ -4,6 +4,7 @@
         "Intersectable",
         "Rgba",
         "Structs",
+        "clippy",
         "powf",
         "rasterizer",
         "raytracer",
