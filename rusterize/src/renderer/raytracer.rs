@@ -48,6 +48,6 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
     println!("Done rendering!");
     cam.film = buffer;
     cam.film
-        .save_with_format("./result", im::ImageFormat::PNG)
+        .save_with_format("./result.png", im::ImageFormat::PNG)
         .unwrap();
 }
