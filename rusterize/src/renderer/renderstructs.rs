@@ -185,7 +185,7 @@ impl PerspectiveCamera {
             self.position.clone(),
             pixel_position - self.position.clone(),
             0_f32,
-            10000_f32,
+            1000_f32,
         )
     }
     pub fn sample_pixel(&self, u: f32, v: f32, rng: &mut ThreadRng) -> CameraSample {

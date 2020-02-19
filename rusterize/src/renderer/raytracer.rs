@@ -1,5 +1,6 @@
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
+use crate::renderer::integrators;
 use crate::renderer::renderstructs::IntersectionRecord;
 use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
@@ -12,7 +13,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
     let mut rng = rand::thread_rng();
     let mut buffer = RgbaImage::new(cam.film_width, cam.film_height);
     // Iterate over all pixels, sample each pixel and produce num of samples ray per pixel.
-    // Call integrator per pixel based on ray
+    // Call integrator per pixel based on raycam
     for x in 0..cam.film_width {
         for y in 0..cam.film_height {
             let mut pixel_buffer: Vec<Vec3> = Vec::new();
@@ -24,15 +25,10 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
                 //Generate ray with origin cam
                 let camera_sample = cam.sample_pixel(x as f32, y as f32, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
-                let mut i_rec = IntersectionRecord::new();
 
-                if scene.intersect(&ray, &mut i_rec) {
-                    println!("In raytracer: {:?}", i_rec);
-                    pixel_buffer.push(Vec3::new(1.0, 1.0, 1.0));
-                    //buffer.put_pixel(x, y, im::Rgba([255 as u8, 255 as u8, 255, 255]));
-                }
-                //Integrate over scene and add to cumulative L_i
-                //Write L_i to buffer at (x,y)
+                let L_i = integrators::depth_integrator(&scene, &cam, &ray, &mut rng);
+
+                pixel_buffer.push(L_i);
                 let acc_pixel_buffer: Vec3 = pixel_buffer.iter().sum();
                 let normalized_pixel_buffer =
                     acc_pixel_buffer.scale(255.0 / scene.samples_per_pixel as f32);

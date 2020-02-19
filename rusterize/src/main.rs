@@ -38,7 +38,7 @@ fn main() {
         encoder: window.factory.create_command_buffer().into(),
     };
 
-    let scene = Scene::single_triangle(5);
+    let scene = Scene::three_triangles(5);
     let mut cam = PerspectiveCamera::new(
         Vec3::new(0.0, 0.0, 1.0),
         Vec3::new(0.0, 0.0, -50.0),
