@@ -10,22 +10,42 @@ pub struct Scene {
 }
 
 impl Scene {
-    pub fn three_triangles(spp: u32) -> Self {
+    pub fn cornel_box(spp: u32) -> Self {
         let mut vec = Vec::new();
+        // Floor
         vec.push(Triangle::new(
-            Vec3::new(-150.0, 0.0, 1.0),
-            Vec3::new(150.0, 100.0, 1.0),
-            Vec3::new(0.0, -100.0, 150.0),
+            Vec3::new(-150.0, 0.0, 0.0),
+            Vec3::new(-150.0, 0.0, 300.0),
+            Vec3::new(150.0, 0.0, 300.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(150.0, 100.0, 1.0),
-            Vec3::new(0.0, -100.0, 150.0),
-            Vec3::new(150.0, -50.0, 1.0),
+            Vec3::new(-150.0, 0.0, 0.0),
+            Vec3::new(150.0, 0.0, 300.0),
+            Vec3::new(150.0, 0.0, 0.0),
+        ));
+
+        // right hand side
+        vec.push(Triangle::new(
+            Vec3::new(150.0, 0.0, 300.0),
+            Vec3::new(150.0, 0.0, 0.0),
+            Vec3::new(150.0, 300.0, 300.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(0.0, -100.0, 150.0),
-            Vec3::new(150.0, -50.0, 1.0),
-            Vec3::new(150.0, -390.0, 120.0),
+            Vec3::new(150.0, 0.0, 0.0),
+            Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 0.0),
+        ));
+
+        // left hand side
+        vec.push(Triangle::new(
+            Vec3::new(-150.0, 0.0, 300.0),
+            Vec3::new(-150.0, 0.0, 0.0),
+            Vec3::new(-150.0, 300.0, 300.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(-150.0, 0.0, 0.0),
+            Vec3::new(-150.0, 300.0, 300.0),
+            Vec3::new(-150.0, 300.0, 0.0),
         ));
         Scene {
             triangles: vec,

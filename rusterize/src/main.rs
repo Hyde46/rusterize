@@ -38,12 +38,12 @@ fn main() {
         encoder: window.factory.create_command_buffer().into(),
     };
 
-    let scene = Scene::three_triangles(5);
+    let scene = Scene::cornel_box(5);
     let mut cam = PerspectiveCamera::new(
         Vec3::new(0.0, 0.0, 1.0),
-        Vec3::new(0.0, 0.0, -50.0),
+        Vec3::new(0.0, 250.0, -55.0),
         Vec3::new(0.0, 1.0, 0.0),
-        40.0,
+        30.0,
         width,
         height,
     );

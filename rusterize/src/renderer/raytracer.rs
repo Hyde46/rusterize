@@ -23,7 +23,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
             for _ in 0..scene.samples_per_pixel {
                 //Sample pixel (x,y)
                 //Generate ray with origin cam
-                let camera_sample = cam.sample_pixel(x as f32, y as f32, &mut rng);
+                let camera_sample = cam.sample_pixel(x, y, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
 
                 let L_i = integrators::depth_integrator(&scene, &cam, &ray, &mut rng);
