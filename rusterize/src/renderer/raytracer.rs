@@ -1,6 +1,6 @@
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
-use crate::renderer::integrators;
+use crate::renderer::integrators::depth_integrator;
 use crate::renderer::renderstructs::IntersectionRecord;
 use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
@@ -26,7 +26,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
                 let camera_sample = cam.sample_pixel(x, y, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
 
-                let L_i = integrators::depth_integrator(&scene, &cam, &ray, &mut rng);
+                let L_i = depth_integrator::integrate(&scene, &cam, &ray, &mut rng);
 
                 pixel_buffer.push(L_i);
                 let acc_pixel_buffer: Vec3 = pixel_buffer.iter().sum();

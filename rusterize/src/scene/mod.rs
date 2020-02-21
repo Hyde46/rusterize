@@ -47,6 +47,31 @@ impl Scene {
             Vec3::new(-150.0, 300.0, 300.0),
             Vec3::new(-150.0, 300.0, 0.0),
         ));
+
+        // Ceiling
+        vec.push(Triangle::new(
+            Vec3::new(-150.0, 300.0, 0.0),
+            Vec3::new(-150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 300.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(-150.0, 300.0, 0.0),
+            Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 0.0),
+        ));
+
+        // Back wall
+        vec.push(Triangle::new(
+            Vec3::new(-150.0, 0.0, 300.0),
+            Vec3::new(150.0, 0.0, 300.0),
+            Vec3::new(-150.0, 300.0, 300.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(150.0, 0.0, 300.0),
+            Vec3::new(-150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 300.0),
+        ));
+
         Scene {
             triangles: vec,
             samples_per_pixel: spp,
