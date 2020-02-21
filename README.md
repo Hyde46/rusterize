@@ -13,6 +13,10 @@ of comparison.
 
 _Work in Progress_.
 
+Current raytracing result:
+
+![Raytracer cornell box](https://github.com/Hyde46/rusterize/blob/master/rusterize/result.png)
+
 ## Prerequisities
 
 Before you begin, ensure you have met the following requirements:
