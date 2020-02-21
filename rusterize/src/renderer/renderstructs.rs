@@ -173,9 +173,8 @@ impl PerspectiveCamera {
         }
     }
     pub fn generate_ray(&self, camera_sample: CameraSample) -> Ray {
-        //TODO: Generate ray based on camera sample
-
-        let pixel_position = (self.direction.clone()).scale(self.focal_length)
+        let pixel_position = self.position.clone()
+            + (self.direction.clone()).scale(self.focal_length)
             + Vec3::new(
                 camera_sample.image_x - 300_f32,
                 camera_sample.image_y - 300_f32,

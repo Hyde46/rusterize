@@ -12,6 +12,7 @@ pub struct Scene {
 impl Scene {
     pub fn cornel_box(spp: u32) -> Self {
         let mut vec = Vec::new();
+
         // Floor
         vec.push(Triangle::new(
             Vec3::new(-150.0, 0.0, 0.0),
@@ -70,6 +71,66 @@ impl Scene {
             Vec3::new(150.0, 0.0, 300.0),
             Vec3::new(-150.0, 300.0, 300.0),
             Vec3::new(150.0, 300.0, 300.0),
+        ));
+        // Small Box in Scene
+        // Front
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 0.0, 15.0),
+            Vec3::new(15.0, 0.0, 15.0),
+            Vec3::new(-15.0, 30.0, 15.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(15.0, 0.0, 15.0),
+            Vec3::new(-15.0, 30.0, 15.0),
+            Vec3::new(15.0, 30.0, 15.0),
+        ));
+
+        // Back wall
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 0.0, 30.0),
+            Vec3::new(15.0, 0.0, 30.0),
+            Vec3::new(-15.0, 30.0, 30.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(15.0, 0.0, 30.0),
+            Vec3::new(-15.0, 30.0, 30.0),
+            Vec3::new(15.0, 30.0, 30.0),
+        ));
+
+        // right hand side
+        vec.push(Triangle::new(
+            Vec3::new(15.0, 0.0, 30.0),
+            Vec3::new(15.0, 0.0, 0.0),
+            Vec3::new(15.0, 30.0, 30.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(15.0, 0.0, 0.0),
+            Vec3::new(15.0, 30.0, 30.0),
+            Vec3::new(15.0, 30.0, 0.0),
+        ));
+
+        // left hand side
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 0.0, 30.0),
+            Vec3::new(-15.0, 0.0, 0.0),
+            Vec3::new(-15.0, 30.0, 30.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 0.0, 0.0),
+            Vec3::new(-15.0, 30.0, 30.0),
+            Vec3::new(-15.0, 30.0, 0.0),
+        ));
+
+        // Ceiling
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 30.0, 0.0),
+            Vec3::new(-15.0, 30.0, 30.0),
+            Vec3::new(15.0, 30.0, 30.0),
+        ));
+        vec.push(Triangle::new(
+            Vec3::new(-15.0, 30.0, 0.0),
+            Vec3::new(15.0, 30.0, 30.0),
+            Vec3::new(15.0, 30.0, 0.0),
         ));
 
         Scene {
