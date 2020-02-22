@@ -13,9 +13,10 @@ pub fn integrate(scene: &Scene, cam: &PerspectiveCamera, ray: &Ray, rng: &mut Th
 
     let mut i_rec = IntersectionRecord::new();
 
-    if scene.intersect(&ray, &mut i_rec) {
+    if let Some(i_rec) = scene.intersect(&ray) {
         let d = 1_f32 - (i_rec.distance / ray.max_dist);
         L_i = L_i.add(&Vec3::new(d, d, d));
     }
+
     L_i
 }

@@ -75,62 +75,62 @@ impl Scene {
         // Small Box in Scene
         // Front
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 0.0, 15.0),
-            Vec3::new(15.0, 0.0, 15.0),
-            Vec3::new(-15.0, 30.0, 15.0),
+            Vec3::new(-15.0, 0.0, 215.0),
+            Vec3::new(15.0, 0.0, 215.0),
+            Vec3::new(-15.0, 30.0, 215.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(15.0, 0.0, 15.0),
-            Vec3::new(-15.0, 30.0, 15.0),
-            Vec3::new(15.0, 30.0, 15.0),
+            Vec3::new(15.0, 0.0, 215.0),
+            Vec3::new(-15.0, 30.0, 215.0),
+            Vec3::new(15.0, 30.0, 215.0),
         ));
 
         // Back wall
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 0.0, 30.0),
-            Vec3::new(15.0, 0.0, 30.0),
-            Vec3::new(-15.0, 30.0, 30.0),
+            Vec3::new(-15.0, 0.0, 230.0),
+            Vec3::new(15.0, 0.0, 230.0),
+            Vec3::new(-15.0, 30.0, 230.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(15.0, 0.0, 30.0),
-            Vec3::new(-15.0, 30.0, 30.0),
-            Vec3::new(15.0, 30.0, 30.0),
+            Vec3::new(15.0, 0.0, 230.0),
+            Vec3::new(-15.0, 30.0, 230.0),
+            Vec3::new(15.0, 30.0, 230.0),
         ));
 
         // right hand side
         vec.push(Triangle::new(
-            Vec3::new(15.0, 0.0, 30.0),
-            Vec3::new(15.0, 0.0, 0.0),
-            Vec3::new(15.0, 30.0, 30.0),
+            Vec3::new(15.0, 0.0, 230.0),
+            Vec3::new(15.0, 0.0, 200.0),
+            Vec3::new(15.0, 30.0, 230.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(15.0, 0.0, 0.0),
-            Vec3::new(15.0, 30.0, 30.0),
-            Vec3::new(15.0, 30.0, 0.0),
+            Vec3::new(15.0, 0.0, 200.0),
+            Vec3::new(15.0, 30.0, 230.0),
+            Vec3::new(15.0, 30.0, 200.0),
         ));
 
         // left hand side
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 0.0, 30.0),
-            Vec3::new(-15.0, 0.0, 0.0),
-            Vec3::new(-15.0, 30.0, 30.0),
+            Vec3::new(-15.0, 0.0, 230.0),
+            Vec3::new(-15.0, 0.0, 200.0),
+            Vec3::new(-15.0, 30.0, 230.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 0.0, 0.0),
-            Vec3::new(-15.0, 30.0, 30.0),
-            Vec3::new(-15.0, 30.0, 0.0),
+            Vec3::new(-15.0, 0.0, 200.0),
+            Vec3::new(-15.0, 30.0, 230.0),
+            Vec3::new(-15.0, 30.0, 200.0),
         ));
 
         // Ceiling
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 30.0, 0.0),
-            Vec3::new(-15.0, 30.0, 30.0),
-            Vec3::new(15.0, 30.0, 30.0),
+            Vec3::new(-15.0, 30.0, 200.0),
+            Vec3::new(-15.0, 30.0, 230.0),
+            Vec3::new(15.0, 30.0, 230.0),
         ));
         vec.push(Triangle::new(
-            Vec3::new(-15.0, 30.0, 0.0),
-            Vec3::new(15.0, 30.0, 30.0),
-            Vec3::new(15.0, 30.0, 0.0),
+            Vec3::new(-15.0, 30.0, 200.0),
+            Vec3::new(15.0, 30.0, 230.0),
+            Vec3::new(15.0, 30.0, 200.0),
         ));
 
         Scene {
@@ -152,12 +152,23 @@ impl Scene {
         }
     }
 
-    pub fn intersect(&self, ray: &Ray, i_rec: &mut IntersectionRecord) -> bool {
+    pub fn intersect(&self, ray: &Ray) -> Option<IntersectionRecord> {
+        let mut i_records: Vec<IntersectionRecord> = Vec::new();
+        let mut min_dist = 1_000_000_f32;
         for t in &self.triangles {
-            if t.intersects(ray, i_rec) {
-                return true;
+            let mut temp_i_rec = IntersectionRecord::new();
+            if t.intersects(ray, &mut temp_i_rec) {
+                if temp_i_rec.distance < min_dist {
+                    min_dist = temp_i_rec.distance;
+                }
+                i_records.push(temp_i_rec);
             }
         }
-        false
+        for rec in i_records {
+            if rec.distance == min_dist {
+                return Some(rec.clone());
+            }
+        }
+        None
     }
 }

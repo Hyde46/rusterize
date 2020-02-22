@@ -33,7 +33,7 @@ pub struct Ray {
     pub max_dist: f32,
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub struct IntersectionRecord {
     // Implements DataStructure holding information about
     // a point in 3D space where a ray may intersect with an other
