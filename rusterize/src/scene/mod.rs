@@ -33,8 +33,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(150.0, 0.0, 0.0),
-            Vec3::new(150.0, 300.0, 300.0),
             Vec3::new(150.0, 300.0, 0.0),
+            Vec3::new(150.0, 300.0, 300.0),
         ));
 
         // left hand side
@@ -45,8 +45,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(-150.0, 0.0, 0.0),
-            Vec3::new(-150.0, 300.0, 300.0),
             Vec3::new(-150.0, 300.0, 0.0),
+            Vec3::new(-150.0, 300.0, 300.0),
         ));
 
         // Ceiling
@@ -69,8 +69,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(150.0, 0.0, 300.0),
-            Vec3::new(-150.0, 300.0, 300.0),
             Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(-150.0, 300.0, 300.0),
         ));
         // Small Box in Scene
         // Front
@@ -81,8 +81,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(15.0, 0.0, 215.0),
-            Vec3::new(-15.0, 30.0, 215.0),
             Vec3::new(15.0, 30.0, 215.0),
+            Vec3::new(-15.0, 30.0, 215.0),
         ));
 
         // Back wall
@@ -93,8 +93,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(15.0, 0.0, 230.0),
-            Vec3::new(-15.0, 30.0, 230.0),
             Vec3::new(15.0, 30.0, 230.0),
+            Vec3::new(-15.0, 30.0, 230.0),
         ));
 
         // right hand side
@@ -105,8 +105,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(15.0, 0.0, 200.0),
-            Vec3::new(15.0, 30.0, 230.0),
             Vec3::new(15.0, 30.0, 200.0),
+            Vec3::new(15.0, 30.0, 230.0),
         ));
 
         // left hand side
@@ -117,8 +117,8 @@ impl Scene {
         ));
         vec.push(Triangle::new(
             Vec3::new(-15.0, 0.0, 200.0),
-            Vec3::new(-15.0, 30.0, 230.0),
             Vec3::new(-15.0, 30.0, 200.0),
+            Vec3::new(-15.0, 30.0, 230.0),
         ));
 
         // Ceiling

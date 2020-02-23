@@ -190,6 +190,6 @@ impl PerspectiveCamera {
     pub fn sample_pixel(&self, u: u32, v: u32, rng: &mut ThreadRng) -> CameraSample {
         let x_rnd: f32 = rng.gen();
         let y_rnd: f32 = rng.gen();
-        CameraSample::new_image_plane(u as f32 + x_rnd, (self.film_height - v) as f32 + y_rnd)
+        CameraSample::new_image_plane(u as f32 + x_rnd, (self.film_height - v) as f32 - y_rnd)
     }
 }

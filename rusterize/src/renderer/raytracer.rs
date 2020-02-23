@@ -1,6 +1,6 @@
 use crate::math::vectors::Vec3;
 use crate::math::vectors::VectorMath;
-use crate::renderer::integrators::depth_integrator;
+use crate::renderer::integrators::normal_integrator;
 use crate::renderer::renderstructs::IntersectionRecord;
 use crate::renderer::renderstructs::PerspectiveCamera;
 use crate::scene::Scene;
@@ -15,6 +15,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
     // Iterate over all pixels, sample each pixel and produce num of samples ray per pixel.
     // Call integrator per pixel based on raycam
     for x in 0..cam.film_width {
+        println!("In Row {:?}/{:?}", x, cam.film_width);
         for y in 0..cam.film_height {
             let mut pixel_buffer: Vec<Vec3> = Vec::new();
             //Start with dark pixel
@@ -26,7 +27,7 @@ pub fn render_scene(scene: &Scene, cam: &mut PerspectiveCamera) {
                 let camera_sample = cam.sample_pixel(x, y, &mut rng);
                 let ray = cam.generate_ray(camera_sample);
 
-                let L_i = depth_integrator::integrate(&scene, &cam, &ray, &mut rng);
+                let L_i = normal_integrator::integrate(&scene, &cam, &ray, &mut rng);
 
                 pixel_buffer.push(L_i);
                 let acc_pixel_buffer: Vec3 = pixel_buffer.iter().sum();
