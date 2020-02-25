@@ -38,7 +38,7 @@ fn main() {
         encoder: window.factory.create_command_buffer().into(),
     };
 
-    let scene = Scene::cornel_box(10);
+    let scene = Scene::cornel_box(3);
     let mut cam = PerspectiveCamera::new(
         Vec3::new(0.0, 0.0, 1.0),
         Vec3::new(0.0, 150.0, -250.0),

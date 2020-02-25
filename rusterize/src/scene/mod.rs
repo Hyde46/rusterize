@@ -28,13 +28,13 @@ impl Scene {
         // right hand side
         vec.push(Triangle::new(
             Vec3::new(150.0, 0.0, 300.0),
-            Vec3::new(150.0, 0.0, 0.0),
             Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(150.0, 0.0, 0.0),
         ));
         vec.push(Triangle::new(
             Vec3::new(150.0, 0.0, 0.0),
-            Vec3::new(150.0, 300.0, 0.0),
             Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 0.0),
         ));
 
         // left hand side
@@ -52,37 +52,37 @@ impl Scene {
         // Ceiling
         vec.push(Triangle::new(
             Vec3::new(-150.0, 300.0, 0.0),
-            Vec3::new(-150.0, 300.0, 300.0),
             Vec3::new(150.0, 300.0, 300.0),
+            Vec3::new(-150.0, 300.0, 300.0),
         ));
         vec.push(Triangle::new(
             Vec3::new(-150.0, 300.0, 0.0),
-            Vec3::new(150.0, 300.0, 300.0),
             Vec3::new(150.0, 300.0, 0.0),
+            Vec3::new(150.0, 300.0, 300.0),
         ));
 
         // Back wall
         vec.push(Triangle::new(
             Vec3::new(-150.0, 0.0, 300.0),
-            Vec3::new(150.0, 0.0, 300.0),
             Vec3::new(-150.0, 300.0, 300.0),
+            Vec3::new(150.0, 0.0, 300.0),
         ));
         vec.push(Triangle::new(
             Vec3::new(150.0, 0.0, 300.0),
-            Vec3::new(150.0, 300.0, 300.0),
             Vec3::new(-150.0, 300.0, 300.0),
+            Vec3::new(150.0, 300.0, 300.0),
         ));
         // Small Box in Scene
         // Front
         vec.push(Triangle::new(
             Vec3::new(-15.0, 0.0, 215.0),
-            Vec3::new(15.0, 0.0, 215.0),
             Vec3::new(-15.0, 30.0, 215.0),
+            Vec3::new(15.0, 0.0, 215.0),
         ));
         vec.push(Triangle::new(
             Vec3::new(15.0, 0.0, 215.0),
-            Vec3::new(15.0, 30.0, 215.0),
             Vec3::new(-15.0, 30.0, 215.0),
+            Vec3::new(15.0, 30.0, 215.0),
         ));
 
         // Back wall
