@@ -182,7 +182,7 @@ impl PerspectiveCamera {
             );
         Ray::new(
             self.position.clone(),
-            pixel_position - self.position.clone(),
+            (pixel_position - self.position.clone()).normalize(),
             0_f32,
             1000_f32,
         )

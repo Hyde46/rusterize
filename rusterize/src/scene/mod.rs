@@ -158,6 +158,9 @@ impl Scene {
         for t in &self.triangles {
             let mut temp_i_rec = IntersectionRecord::new();
             if t.intersects(ray, &mut temp_i_rec) {
+                if temp_i_rec.distance > ray.max_dist || temp_i_rec.distance < ray.min_dist {
+                    continue;
+                }
                 if temp_i_rec.distance < min_dist {
                     min_dist = temp_i_rec.distance;
                 }

@@ -1,5 +1,6 @@
 pub mod geometry;
 pub mod matrices;
+pub mod samplers;
 pub mod vectors {
 
     use std::f32;

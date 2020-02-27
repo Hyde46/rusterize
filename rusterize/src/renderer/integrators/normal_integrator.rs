@@ -16,7 +16,8 @@ pub fn integrate(scene: &Scene, cam: &PerspectiveCamera, ray: &Ray, rng: &mut Th
     if let Some(i_rec) = scene.intersect(&ray) {
         let theta: f32 =
             ((i_rec.normal.dot(&ray.dir.scale(-1.0))) / (i_rec.normal.length() * ray.dir.length()));
+        let theta = theta.abs();
         L_i = L_i.add(&Vec3::new(theta, theta, theta));
     }
-    L_i.scale(1.0 / 3.0)
+    L_i
 }
